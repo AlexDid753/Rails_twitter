@@ -11,6 +11,8 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sprockets', '=2.11.0'
+gem 'rake', '< 11.0'
+gem 'bcrypt-ruby', '3.1.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
