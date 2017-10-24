@@ -34,7 +34,7 @@ describe "Static pages" do
   end
 
   describe "profile page" do
-    let(:user) {FactoryGirl.create(:user)}
+    let(:user) {FactoryBot.create(:user)}
     before {visit user_path(user)}
 
     it {should have_content(user.name)}
