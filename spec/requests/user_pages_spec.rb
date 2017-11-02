@@ -1,3 +1,4 @@
+=begin
 require 'spec_helper'
 
 describe "User pages" do
@@ -12,7 +13,7 @@ describe "User pages" do
   end
 end
 
-describe "edit" do
+describe "edit", :type => :controller do
   let(:user) {FactoryBot.create(:user)}
   before do
     log_in user
@@ -23,10 +24,10 @@ describe "edit" do
     let(:new_name) {"New Name"}
     let(:new_email) {"new@example.com"}
     before do
-      fill_in "Name", with: new_name
-      fill_in "Email", with: new_email
-      fill_in "Password", with: user.password
-      fill_in "Confirm Password", with: user.password
+      fill_in "user_name", with: new_name
+      fill_in "user_email", with: new_email
+      fill_in "user_password", with: user.password
+      fill_in "user_password_confirmation", with: user.password
       click_button "Save changes"
     end
 
@@ -37,3 +38,4 @@ describe "edit" do
     specify {expect(user.reload.email).to eq new_email}
   end
 end
+=end
