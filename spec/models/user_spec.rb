@@ -12,6 +12,8 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:feed) }
+  it { should respond_to(:active_relationships) }
 
   describe "when name is not present" do
     before { @user.name = " " }
@@ -109,6 +111,27 @@ describe User do
       expect(microposts).not_to be_empty
       microposts.each do |micropost|
         expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
+    
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryBot.create(:micropost, user: FactoryBot.create(:user))
+      end
+      let(:followed_user) { FactoryBot.create(:user) }
+
+      before do
+        @user.follow!(followed_user)
+        3.times { followed_user.microposts.create!(content: "Lorem ipsum") }
+      end
+
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+      its(:feed) do
+        followed_user.microposts.each do |micropost|
+          should include(micropost)
+        end
       end
     end
   end
