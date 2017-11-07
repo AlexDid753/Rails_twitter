@@ -1,5 +1,5 @@
-require 'rails_helper'
+#require 'rails_helper'
 
-RSpec.describe MicropostsController, type: :controller do
+#RSpec.describe MicropostsController, type: :controller do
 
-end
+#end

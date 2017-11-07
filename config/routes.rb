@@ -12,8 +12,13 @@ SampleApp3::Application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :microposts,          only: [:create, :destroy]
+  resources :relationships,       only: [:create, :destroy]
   #match '/signup',  to: 'users#new',            via: 'get'
   #match '/help',    to: 'static_pages#help',    via: 'get'
   #match '/about',   to: 'static_pages#about',   via: 'get'
